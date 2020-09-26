@@ -1,25 +1,25 @@
 <template>
   <div>
-     <button class="pale" @click="favourite = false" style="margin-right:10px;">All Images</button>
-    <button class="green" @click="favourite = true">Favourite Images</button>
+     <button class="pale" @click="changeExposure(false)" style="margin-right:10px;">All Images</button>
+    <button class="green" @click="changeExposure(true)">Favourite Images</button>
       <!-- <li tabindex="0" class="pointer f-right">
         <router-link to="/favoriteimages" tag="span">Favourites images</router-link>
      </li> -->
       <table style="width:100%;margin-top:10px;">
         <thead>
-          <th>Id</th>
+          <!-- <th>Id</th> -->
           <th>Name</th>
           <th>Resolution width</th>
           <th>Resolution height</th>
         </thead>
         <tbody>
             <tr v-for="(img, ind) in imgs" :key="ind">
-              <td>
-                {{img.name}}   
+              <td @click="toView(img.id)">
+                {{img.name}}
               </td>
-              <td>
+              <!-- <td>
                 {{img.id}}
-              </td>
+              </td> -->
               <td>
                 {{img.resolution.width}}
               </td>
@@ -34,6 +34,7 @@
 
 <script>
 import ImageService from './../Service/ImageService'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AvailableImages',
@@ -45,12 +46,34 @@ export default {
   },
   computed: {
       favImgs: function () {
-          return this.avImgs.filter(ig => ig.favourite === true);
+        if (this.avImgs) return this.avImgs.filter(ig => ig.favourite === true);
+        return null
       },
       imgs: function () {
-        if (this.favourite) return this.favImgs;
+        if (this.exposeFavourites) return this.favImgs;
         else return this.avImgs
-      }
+      },
+    ...mapGetters({
+            exposeFavourites: 'GET_EXPOSE',
+      }),
+  },
+  methods: {
+    toView(id) {
+      console.log("ID");
+      console.log(id);
+      this.$router.push({
+          name: "ViewImage",
+          params: {
+            id: id
+          }
+       });
+    },
+    changeExposure(bl) {
+      console.log('change Exposure');
+      console.log(bl);
+       this.$store.commit('EXPOSE', bl);
+       console.log(this.exposeFavourites);
+    }
   },
   async created () {
     let context = this;

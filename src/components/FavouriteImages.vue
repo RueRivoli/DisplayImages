@@ -1,7 +1,6 @@
 <template>
-  <div>{{ favImgs }}
+  <div>
     <h1>Available Images</h1>
-    <!-- <h1>Favourites Images</h1> -->
     <button @click="favourite = true">Favourite Images</button>
       <table style="width:100%;">
         <thead>
@@ -40,11 +39,6 @@ export default {
       avImgs: null
     }
   },
-  computed: {
-      favImgs: function () {
-          return "jolie";
-      }
-  },
   async created () {
     let context = this;
     ImageService.loadImages().then(function (imgs) {
@@ -57,6 +51,7 @@ export default {
 </script>
 
 <style scoped>
+
 h3 {
   margin: 40px 0 0;
 }

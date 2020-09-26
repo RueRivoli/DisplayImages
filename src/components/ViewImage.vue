@@ -1,11 +1,7 @@
 <template>
   <div>
-     <button class="pale" @click="favourite = false" style="margin-right:10px;">All Images</button>
-    <button class="green" @click="favourite = true">Favourite Images</button>
-      <!-- <li tabindex="0" class="pointer f-right">
-        <router-link to="/favoriteimages" tag="span">Favourites images</router-link>
-     </li> -->
-        <img src="srcImg" alt="">
+     <button class="pale" @click="toImages" style="margin-right:10px;">Retour</button>
+     <img :src="srcImg" alt="">
   </div>
 </template>
 
@@ -24,12 +20,19 @@ export default {
   },
   async created () {
     let context = this;
-    ImageService.importSrcImage(1).then(function (imgs) {
-      console.log('IMAGES');
+    ImageService.importSrcImage(this.id).then(function (imgs) {
+      console.log('SRC img');
       console.log(imgs);
-        context.avImgs = imgs;
+      context.srcImg = imgs;
         console.log(context.favImgs);
       }).catch();
+  },
+  methods: {
+      toImages() {
+      this.$router.push({
+          name: "AvailableImages"
+       });
+    },
   }
 }
 </script>

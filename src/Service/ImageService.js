@@ -23,13 +23,29 @@ class ImageService {
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", url + `${id}`);
-            xhr.onreadystatechange = function() {
-                if (this.readyState === 4 && this.status === 200) {
-                  let response = JSON.parse(this.responseText); 
-                  console.log(response);
-                  resolve(response);
-              }
+            xhr.onload = function(){
+                var img = new Image();
+                var response = xhr.responseText;
+                var binary = ""
+                 
+                for(let i=0;i<response.length;i++){
+                    binary += String.fromCharCode(response.charCodeAt(i) & 0xff);
+                }
+                
+                img.src = 'data:image/jpeg;base64,' + btoa(binary);
+                resolve(img.src);
+                console.log(img.src);
+                // var canvas = document.getElementById('showImage');
+                // var context = canvas.getContext('2d');
+                    
+                // context.drawImage(img,0,0);
+                // var snapshot = canvas.toDataURL("image/png");
+                // var twinImage = document.getElementById('twinImg');
+                // twinImage.src = snapshot;
+    
             }
+            
+            xhr.overrideMimeType('text/plain; charset=x-user-defined');
             xhr.onerror = reject;
             xhr.send();
         });

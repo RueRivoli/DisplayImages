@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <AvailableImages/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import AvailableImages from './components/AvailableImages.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    AvailableImages
-  }
 }
 </script>
 

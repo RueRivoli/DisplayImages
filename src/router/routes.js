@@ -1,11 +1,11 @@
 import VueRouter from 'vue-router'
 
 import AvailableImages from './../components/AvailableImages';
-import FavouriteImages from './../components/FavouriteImages';
+import ViewImage from './../components/ViewImage';
 
 const routes = [
   { path: '/', name:'AvailableImages', component: AvailableImages },
-  { path: '/favoriteimages', name:'FavouriteImages', component: FavouriteImages },
+  { path: '/viewimage/:id', name:'ViewImage', component: ViewImage, props: route => ({ id: route.params.id }) },
 ]
   const router = new VueRouter({
     mode: 'history',
