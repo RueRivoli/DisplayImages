@@ -1,11 +1,9 @@
 <template>
-  <div>
-     <button class="pale" @click="favourite = false" style="margin-right:10px;">All Images</button>
-    <button class="green" @click="favourite = true">Favourite Images</button>
-      <!-- <li tabindex="0" class="pointer f-right">
-        <router-link to="/favoriteimages" tag="span">Favourites images</router-link>
-     </li> -->
-      <table style="width:100%;margin-top:10px;">
+  <div>{{ favImgs }}
+    <h1>Available Images</h1>
+    <!-- <h1>Favourites Images</h1> -->
+    <button @click="favourite = true">Favourite Images</button>
+      <table style="width:100%;">
         <thead>
           <th>Id</th>
           <th>Name</th>
@@ -13,7 +11,7 @@
           <th>Resolution height</th>
         </thead>
         <tbody>
-            <tr v-for="(img, ind) in imgs" :key="ind">
+            <tr v-for="(img, ind) in avImgs" :key="ind">
               <td>
                 {{img.name}}   
               </td>
@@ -39,17 +37,12 @@ export default {
   name: 'AvailableImages',
   data() {
     return {
-      avImgs: null,
-      favourite: false
+      avImgs: null
     }
   },
   computed: {
       favImgs: function () {
-          return this.avImgs.filter(ig => ig.favourite === true);
-      },
-      imgs: function () {
-        if (this.favourite) return this.favImgs;
-        else return this.avImgs
+          return "jolie";
       }
   },
   async created () {
@@ -58,39 +51,12 @@ export default {
       console.log('IMAGES');
       console.log(imgs);
         context.avImgs = imgs;
-        console.log(context.favImgs);
       }).catch();
   }
 }
 </script>
 
 <style scoped>
-
-button{
-  padding: 5px;
-  background-color: #1E969D;
-  color: white;
-  border-radius:2px;
-  border-color: transparent;
-  cursor: pointer;
-}
-
-.pale{
-   background-color: #cad49d;
-  color: black;
-}
-
-.green{
-  background-color: #1E969D;
-  color: white;
-}
-
-
-button:hover{
-    opacity: 0.90;
-}
-
-
 h3 {
   margin: 40px 0 0;
 }
