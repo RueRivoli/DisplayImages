@@ -44,7 +44,7 @@ export default {
   methods: {
       toImages() {
       this.$router.push({
-          name: "AvailableImages"
+          name: "Images"
        });
     },
   }

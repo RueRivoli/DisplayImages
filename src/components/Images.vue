@@ -1,9 +1,8 @@
 <template>
   <div style="margin-top:5vh;">
     <div style="height:15vh;">
-
-     <button :class="{ underline: !exposeFavourites, pale: true}" @click="changeExposure(false)" style="margin-right:10px;">All Images</button>
-    <button :class="{ underline: exposeFavourites, green: true}" @click="changeExposure(true)" style="margin-bottom:20px;">Favourite Images</button>
+       <button :class="{ underline: !exposeFavourites, 'm-r-10': true }" @click="changeExposure(false)" >All Images</button>
+      <button :class="{ underline: exposeFavourites}" @click="changeExposure(true)" >Favourite Images</button>
     </div>
     <div class="grid-container">
       <div class="grid-item" v-for="(img, ind) in imgs" :key="ind" @click="toView(img.id, img.name)">
@@ -18,11 +17,10 @@ import ImageService from './../Service/ImageService'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'AvailableImages',
+  name: 'Images',
   data() {
     return {
       avImgs: null,
-      favourite: false
     }
   },
   computed: {
@@ -40,8 +38,6 @@ export default {
   },
   methods: {
     toView(id, name) {
-      console.log("ID");
-      console.log(id);
       this.$store.commit('PICTURE', name);
       this.$router.push({
           name: "ViewImage",
@@ -52,8 +48,6 @@ export default {
        });
     },
     changeExposure(bl) {
-      console.log('change Exposure');
-      console.log(bl);
        this.$store.commit('EXPOSE', bl);
        console.log(this.exposeFavourites);
     }
@@ -61,8 +55,6 @@ export default {
   async created () {
     let context = this;
     ImageService.loadImages().then(function (imgs) {
-      console.log('IMAGES');
-      console.log(imgs);
         context.avImgs = imgs;
         console.log(context.favImgs);
       }).catch();
@@ -99,58 +91,17 @@ export default {
   border-color:white;
 }
 
-.highlight{
-  font-weight: bold;
-  cursor: pointer;
-}
-
 button{
   padding: 5px;
   font-size:18px;
-  /* background-color: #1E969D;
-  color: white; */
   border-radius:2px;
   border-color: transparent;
+  background-color:transparent;
   cursor: pointer;
 }
 
-.pale{
-   /* background-color: #cad49d; */
-   background-color:transparent;
-  color: black;
-}
-
-.green{
-  background-color: #1E969D;
-  color: white;
-   background-color:transparent;
-  color: black;
-}
-
-.underline{
-  text-decoration: underline;
-  /* font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif; */
-}
-
-
 button:hover{
     opacity: 0.90;
-}
-
-
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 
 button:focus {outline:0;}

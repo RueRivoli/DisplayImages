@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import router from './router/routes.js'
 import store from './store/'
+import './style/style.css'
 
 Vue.config.productionTip = false
 Vue.use(axios);
