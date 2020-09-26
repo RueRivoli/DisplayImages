@@ -19,6 +19,23 @@ class ImageService {
         });
     }
 
+    static importSrcImage(id) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url + `${id}`);
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                  let response = JSON.parse(this.responseText); 
+                  console.log(response);
+                  resolve(response);
+              }
+            }
+            xhr.onerror = reject;
+            xhr.send();
+        });
+    }
+
+
 }
 
 export default ImageService;
