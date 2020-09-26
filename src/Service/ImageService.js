@@ -1,28 +1,23 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-const url = 'https://portal-tb.lynxx.co/api-tests/image';
+const url = 'https://portal-tb.lynxx.co/api-test/image/';
 
 class ImageService {
 
-    // Retrieve images from the API
-    static getImages() {
-        return new Promise(function(resolve, reject) {
-            try {
-                return axios.get(url).then(function (response) {
-                    console.log('reponse')
-                    console.log(response);
-                    resolve(response.data);
-                }).catch(function (error) {
-                    console.log('Error');
-                    console.log(error);
-                    reject(error);
-                });
-            } catch(err) {
-                console.log('Error');
-                console.log(err);
-                reject(err);
+      static loadImages() {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url + "list");
+            xhr.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                  let response = JSON.parse(this.responseText); 
+                  console.log(response);
+                  resolve(response);
+              }
             }
-        })
+            xhr.onerror = reject;
+            xhr.send();
+        });
     }
 
 }
