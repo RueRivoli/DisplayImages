@@ -28,13 +28,11 @@ class ImageService {
                 var response = xhr.responseText;
                 var binary = ""
                  
-                for(let i=0;i<response.length;i++){
+                for(let i = 0;i < response.length; i++){
                     binary += String.fromCharCode(response.charCodeAt(i) & 0xff);
                 }
-                
                 img.src = 'data:image/jpeg;base64,' + btoa(binary);
                 resolve(img.src);
-                console.log(img.src);
                 // var canvas = document.getElementById('showImage');
                 // var context = canvas.getContext('2d');
                     

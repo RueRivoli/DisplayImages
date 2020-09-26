@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 const state = {
     exposeFavourites: false,
+    picture: null
   }
   
   export default new Vuex.Store({
