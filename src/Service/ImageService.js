@@ -33,16 +33,7 @@ class ImageService {
                 }
                 img.src = 'data:image/jpeg;base64,' + btoa(binary);
                 resolve(img.src);
-                // var canvas = document.getElementById('showImage');
-                // var context = canvas.getContext('2d');
-                    
-                // context.drawImage(img,0,0);
-                // var snapshot = canvas.toDataURL("image/png");
-                // var twinImage = document.getElementById('twinImg');
-                // twinImage.src = snapshot;
-    
             }
-            
             xhr.overrideMimeType('text/plain; charset=x-user-defined');
             xhr.onerror = reject;
             xhr.send();

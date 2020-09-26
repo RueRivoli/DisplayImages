@@ -1,11 +1,11 @@
 <template>
   <div style="margin-top:5vh;">
     <div style="height:15vh;">
-       <button :class="{ underline: !exposeFavourites, 'm-r-10': true }" @click="changeExposure(false)" >All Images</button>
-      <button :class="{ underline: exposeFavourites}" @click="changeExposure(true)" >Favourite Images</button>
+       <button :class="{ underline: !exposeFavourites, 'm-r-10': true, 'pointer': true }" @click="changeExposure(false)" >All Images</button>
+      <button :class="{ underline: exposeFavourites, 'pointer': true}" @click="changeExposure(true)" >Favourite Images</button>
     </div>
     <div class="grid-container">
-      <div class="grid-item" v-for="(img, ind) in imgs" :key="ind" @click="toView(img.id, img.name)">
+      <div class="grid-item pointer" v-for="(img, ind) in imgs" :key="ind" @click="toView(img.id, img.name)">
         <div>{{img.name}}</div>
        </div>
     </div>
@@ -71,11 +71,9 @@ export default {
   padding: 10px;
 }
 .grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
   font-size: 30px;
   text-align: center;
-  cursor:pointer;
   line-height: 20vh;
   margin: 5px;
   color: black;
@@ -97,7 +95,6 @@ button{
   border-radius:2px;
   border-color: transparent;
   background-color:transparent;
-  cursor: pointer;
 }
 
 button:hover{
