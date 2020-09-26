@@ -1,8 +1,8 @@
-// import axios from 'axios';
-
 const url = 'https://portal-tb.lynxx.co/api-test/image/';
 
 class ImageService {
+
+    //Retrieve list of images
       static loadImages() {
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
@@ -19,6 +19,7 @@ class ImageService {
         });
     }
 
+    //Import image id
     static importSrcImage(id) {
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
