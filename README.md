@@ -1,5 +1,13 @@
 # display-images
 
+## Open the project quickly
+
+git clone https://github.com/RueRivoli/DisplayImages.git
+cd DisplayImages
+npm install
+npm run serve
+( http://localhost:4200)
+
 ## Project setup
 ```
 npm install
