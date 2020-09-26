@@ -1,21 +1,55 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
-    <h3>Installed CLI Plugins</h3>
-
+    <h1>Available Images</h1>
+    <h1>Favourites Images</h1>
+      <table style="width:100%;">
+        <thead>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Resolution width</th>
+          <th>Resolution height</th>
+        </thead>
+        <tbody>
+            <tr v-for="(img, ind) in avImgs" :key="ind">
+              <td>
+                {{img.name}}   
+              </td>
+              <td>
+                {{img.id}}
+              </td>
+              <td>
+                {{img.resolution.width}}
+              </td>
+               <td>
+                {{img.resolution.height}}
+              </td>
+            </tr>
+          </tbody>
+      </table>
   </div>
 </template>
 
 <script>
+import ImageService from './../Service/ImageService'
+
 export default {
   name: 'AvailableImages',
-  props: {
-    msg: String
+  data() {
+    return {
+      avImgs: null
+    }
+  },
+  async created () {
+    let context = this;
+    ImageService.loadImages().then(function (imgs) {
+      console.log('IMAGES');
+      console.log(imgs);
+        context.avImgs = imgs;
+      }).catch();
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;

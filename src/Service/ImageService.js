@@ -3,7 +3,6 @@
 const url = 'https://portal-tb.lynxx.co/api-test/image/';
 
 class ImageService {
-
       static loadImages() {
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
